@@ -7,7 +7,11 @@ Rails.application.routes.draw do
       devise_scope :user do
 
         get "/demandes", :to => 'demandes#index'
+        post "/demandes", :to => 'demandes#create'
+        put "/demandes/:id", :to => 'demandes#update'
 
+    
+        
         post "/sign_in", :to => 'sessions#create'
         post "/sign_up", :to => 'registrations#create'
         delete "/sign_out", :to => 'sessions#destroy'
