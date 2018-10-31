@@ -12,8 +12,8 @@ Rails.application.routes.draw do
         post "/demandes", :to => 'demandes#create'
         put "/demandes/:id", :to => 'demandes#update'
 
-    
         
+        put "/upload/Avatar", :to => 'sessions#uploadUserAvatar'
         post "/sign_in", :to => 'sessions#create'
         post "/sign_up", :to => 'registrations#create'
         delete "/sign_out", :to => 'sessions#destroy'
