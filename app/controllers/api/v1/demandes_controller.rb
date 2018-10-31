@@ -33,7 +33,7 @@ class Api::V1::DemandesController < ActionController::API
           if(user.isAdmin)
 
             p user.isAdmin
-             demandes = Demande.where.not(status: nil).limit(1).offset(params[:page]).order('created_at DESC')
+             demandes = Demande.joins(:user).select("users.username,demandes.*").where.not(status: nil).limit(1).offset(params[:page]).order('created_at DESC')
            
           else 
 
@@ -63,7 +63,7 @@ class Api::V1::DemandesController < ActionController::API
           if(user.isAdmin)
 
             p user.isAdmin
-             demandes = Demande.where(status: nil).limit(1).offset(params[:page]).order('created_at DESC')
+             demandes = Demande.joins(:user).select("users.username,demandes.*").where(status: nil).limit(1).offset(params[:page]).order('created_at DESC')
          
           else 
 
