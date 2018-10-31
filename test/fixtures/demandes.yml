@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_debut: 2018-10-31
+  date_fin: 2018-10-31
+  raison: MyString
+  status: false
+
+two:
+  date_debut: 2018-10-31
+  date_fin: 2018-10-31
+  raison: MyString
+  status: false
