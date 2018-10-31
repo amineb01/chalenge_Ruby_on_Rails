@@ -11,11 +11,26 @@ class Api::V1::DemandesController < ActionController::API
         user=User.where(authentication_token:_token,email:_email).first
      if(user)
      
+        demandes = Demande.where(user_id:user.id).order('created_at DESC')
+
+        render json:{data:demandes, status: 'succes'},status: :ok
+     else
+        head(:unauthorized)     
+    
+     end 
+    end 
+
+    def valide 
+        _token=request.headers["X-User-Token"]
+        _email=request.headers["X-User-Email"]
+
+        user=User.where(authentication_token:_token,email:_email).first
+     if(user)
           if(user.isAdmin)
             p user.isAdmin
-             demandes = Demande.order('created_at DESC')
+             demandes = Demande.where.not(status: nil).order('created_at DESC')
            else 
-             demandes = Demande.where(user_id:user.id).order('created_at DESC')
+            head(:unauthorized)     
            end
         render json:{data:demandes, status: 'succes'},status: :ok
      else
@@ -24,6 +39,27 @@ class Api::V1::DemandesController < ActionController::API
      end 
     end 
 
+    def encours 
+        _token=request.headers["X-User-Token"]
+        _email=request.headers["X-User-Email"]
+
+        user=User.where(authentication_token:_token,email:_email).first
+     if(user)
+     
+          if(user.isAdmin)
+            p user.isAdmin
+             demandes = Demande.where(status: nil).order('created_at DESC')
+           else 
+            head(:unauthorized)     
+           end
+        render json:{data:demandes, status: 'succes'},status: :ok
+     else
+        head(:unauthorized)     
+    
+     end 
+    end 
+    
+    
     def create 
         _date_debut =request.request_parameters["date_debut"]
         _date_fin =request.request_parameters["date_fin"]

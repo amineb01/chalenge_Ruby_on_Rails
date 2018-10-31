@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       devise_scope :user do
 
         get "/demandes", :to => 'demandes#index'
+        get "/demandes/admin/encours", :to => 'demandes#encours'
+        get "/demandes/admin/valide", :to => 'demandes#valide'
         post "/demandes", :to => 'demandes#create'
         put "/demandes/:id", :to => 'demandes#update'
 
