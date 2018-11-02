@@ -4,7 +4,7 @@ class Api::V1::DemandesController < ActionController::API
     acts_as_token_authentication_handler_for User
     respond_to :json
 
-    def index 
+    def userDemandes
         _token=request.headers["X-User-Token"]
         _email=request.headers["X-User-Email"]
 
@@ -22,7 +22,7 @@ class Api::V1::DemandesController < ActionController::API
      end 
     end 
 
-    def valide 
+    def validDemandes
 
         _token=request.headers["X-User-Token"]
         _email=request.headers["X-User-Email"]
@@ -50,7 +50,7 @@ class Api::V1::DemandesController < ActionController::API
      end 
     end 
 
-    def encours 
+    def inprocessDemandes 
      
 
         _token=request.headers["X-User-Token"]
@@ -98,7 +98,8 @@ class Api::V1::DemandesController < ActionController::API
            if demande.save
             render json:{data:demande, status: 'succes'},status: :ok
            else
-            render json:{data:demande, status: 'fail'}
+            #render json:{data:demande, status: 'fail'}
+            render json: { message: "Validation failed", errors: demande.errors }, status: 400
 
         end
 

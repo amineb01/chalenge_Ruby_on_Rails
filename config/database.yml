@@ -16,7 +16,11 @@ default: &default
   username: root
   password: amine
   host: localhost
-
+# username: atair_root
+ # password: atair*root
+ # host: gator4095.hostgator.com
+ # port: 3306
+ # database: atair_dev
 development:
   <<: *default
   database: chalenge1_development
