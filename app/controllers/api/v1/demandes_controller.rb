@@ -12,7 +12,7 @@ class Api::V1::DemandesController < ActionController::API
 
      if(user)
 
-        demandes = Demande.where(user_id:user.id).limit(1).offset(params[:page]).order('created_at DESC')
+        demandes = Demande.where(user_id:user.id).limit(10).offset(params[:page]).order('created_at DESC')
         render json:{data:demandes, status: 'succes'},status: :ok
     
      else
@@ -33,7 +33,7 @@ class Api::V1::DemandesController < ActionController::API
           if(user.isAdmin)
 
             p user.isAdmin
-             demandes = Demande.joins(:user).select("users.username,demandes.*").where.not(status: nil).limit(1).offset(params[:page]).order('created_at DESC')
+             demandes = Demande.joins(:user).select("users.username,demandes.*").where.not(status: nil).limit(10).offset(params[:page]).order('created_at DESC')
            
           else 
 
@@ -63,7 +63,7 @@ class Api::V1::DemandesController < ActionController::API
           if(user.isAdmin)
 
             p user.isAdmin
-             demandes = Demande.joins(:user).select("users.username,demandes.*").where(status: nil).limit(1).offset(params[:page]).order('created_at DESC')
+             demandes = Demande.joins(:user).select("users.username,demandes.*").where(status: nil).limit(10).offset(params[:page]).order('created_at DESC')
          
           else 
 
