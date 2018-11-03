@@ -5,7 +5,7 @@ class Api::V1::SessionsController < Devise::SessionsController
         user=User.where(email:params[:email]).first
        
         if user&.valid_password?(params[:password])
-            render json: user.as_json(only: [:id, :email, :authentication_token, :isAdmin]),status: :created
+            render json: user.as_json(only: [:id,:avatar, :email, :authentication_token, :isAdmin]),status: :created
         else
             render json:{data:"Invalid Email Or Password", status: 'fail'},status: :ok
         end 
@@ -27,8 +27,7 @@ class Api::V1::SessionsController < Devise::SessionsController
             p user
             user.avatar = params[:file] # Assign a file like this, or
             user.save
-            _avatarUrl= user.avatar.url # url to avatar
-            render json:{data:_avatarUrl, status: 'succes'},status: :ok
+            render json:{data:user.avatar, status: 'succes'},status: :ok
 
         else
             head(:unauthorized)  
